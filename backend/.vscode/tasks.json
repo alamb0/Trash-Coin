@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "mvn clean install -T100 -Dmaven.clean.failOnError=false",
+            "command": "mvn clean install",
             "group": "build"
         },
         {

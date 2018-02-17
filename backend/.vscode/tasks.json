@@ -1,0 +1,25 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "mvn clean install -T100 -Dmaven.clean.failOnError=false",
+            "group": "build"
+        },
+        {
+            "label": "build (skip test)",
+            "type": "shell",
+            "command": "mvn clean install -DskipTests -T100",
+            "group": "build"
+        },
+        {
+            "label": "Run Unit Test",
+            "type": "shell",
+            "command": "mvn surefire:test",
+            "group": "build"
+        }
+    ]
+}

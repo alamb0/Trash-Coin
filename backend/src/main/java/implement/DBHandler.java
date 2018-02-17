@@ -9,9 +9,6 @@ import com.mongodb.MongoCredential;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.DBObject;
 
-
-
-
 public class DBHandler {
     public static final String USER_COLLECTION = "userCollection";
     public static final String TRASH_COLLECTION = "trashColllection";
@@ -19,7 +16,9 @@ public class DBHandler {
 
     public static DBHandler instance;
 
-    public DBHandler(){}
+    public DBHandler(){
+        instance = this;
+    }
 
     public static DBHandler getInstance(){
         try{
@@ -37,6 +36,6 @@ public class DBHandler {
     }
 
     private MongoDatabase getMongoDatabase(){
-        return new MongoClient(new MongoClientURI(MONGO_URL)).getDatabase("trashClub");
+        return new MongoClient(new MongoClientURI(MONGO_URL)).getDatabase("trashclub");
     }
 }

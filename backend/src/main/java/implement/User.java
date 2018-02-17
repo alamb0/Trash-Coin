@@ -7,6 +7,7 @@ public class User {
     private final long id;
     private ArrayList<Integer> coordinate;
     private int points;
+    private int weight;
 
     public User(long id, ArrayList<Integer> coordinate, int points) {
         this.id = id;

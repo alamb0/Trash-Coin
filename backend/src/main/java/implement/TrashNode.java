@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class TrashNode {
 
     private final long id;
-    private final ArrayList<Integer> coordinate;
+    private final ArrayList<Double> coordinate;
     private int weight;
 
-    public TrashNode(long id, ArrayList<Integer> coordinate, int weight) {
+    public TrashNode(long id, ArrayList<Double> coordinate, int weight) {
         this.id = id;
         this.coordinate = coordinate;
         this.weight = weight;
@@ -18,7 +18,7 @@ public class TrashNode {
         return id;
     }
 
-    public ArrayList<Integer> getCoordinate() {
+    public ArrayList<Double> getCoordinate() {
         return coordinate;
     }
 

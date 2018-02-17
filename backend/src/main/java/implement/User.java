@@ -5,11 +5,10 @@ import java.util.ArrayList;
 public class User {
 
     private final long id;
-    private ArrayList<Integer> coordinate;
+    private ArrayList<Double> coordinate;
     private int points;
-    private int weight;
 
-    public User(long id, ArrayList<Integer> coordinate, int points) {
+    public User(long id, ArrayList<Double> coordinate, int points) {
         this.id = id;
         this.coordinate = coordinate;
         this.points = points;
@@ -19,7 +18,7 @@ public class User {
         return id;
     }
 
-    public ArrayList<Integer> getCoordinate() {
+    public ArrayList<Double> getCoordinate() {
         return coordinate;
     }
 

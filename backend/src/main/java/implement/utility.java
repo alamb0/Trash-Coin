@@ -2,14 +2,20 @@ package implement;
 
 import implement.TrashNode;
 import implement.User;
+import java.util.ArrayList;
 
-public Float getDistance(TrashNode trashNode, User userNode) {
-    ArrayList<Float> trashCoordinate = trashNode.getCoordinate();
-    ArrayList<Float> userCoordinate = userNode.getCoordinate();
+public class utility {
 
-    Float latDifference = Math.abs(trashCoordinate.get(0) - userCoordinate.get(0));
-    Float longDifference = Math.abs(trashCoordinate.get(1) - userCoordinate.get(1));
-    Float distance = Math.sqrt(Math.pow(latDifference, 2) + Math.pow(longDifference, 2));
-    return distance;
+    public Double getDistance(TrashNode trashNode, User userNode) {
+        ArrayList<Double> trashCoordinate = trashNode.getCoordinate();
+        ArrayList<Double> userCoordinate = userNode.getCoordinate();
+
+        Double latDifference = Math.abs(trashCoordinate.get(0) - userCoordinate.get(0));
+        Double longDifference = Math.abs(trashCoordinate.get(1) - userCoordinate.get(1));
+        Double distance = Math.sqrt(Math.pow(latDifference, 2) + Math.pow(longDifference, 2));
+        return distance;
+    }
+
+    
 }
 

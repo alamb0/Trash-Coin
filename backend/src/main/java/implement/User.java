@@ -1,4 +1,4 @@
-package src.main.implement;
+package implement;
 
 import java.util.ArrayList;
 
@@ -8,25 +8,25 @@ public class User {
     private ArrayList<Integer> coordinate;
     private int points;
 
-    public User(long id, ArrayList<Integer> coordinate, int weight) {
+    public User(long id, ArrayList<Integer> coordinate, int points) {
         this.id = id;
         this.coordinate = coordinate;
-        this.weight = weight;
+        this.points = points;
     }
 
     public long getId() {
         return id;
     }
 
-    public ArrayList<Integer> getCoordiante() {
+    public ArrayList<Integer> getCoordinate() {
         return coordinate;
     }
 
-    public int getWeight() {
-        return weight;
+    public int getPoints() {
+        return points;
     }
 
-    public void setWeight(int newWeight) {
-        this.weight = newWeight;
+    public void setPoints(int newPoints) {
+        this.points = newPoints;
     }
 }

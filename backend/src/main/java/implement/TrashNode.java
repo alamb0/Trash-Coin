@@ -1,4 +1,4 @@
-package src.main.implement;
+package implement;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class TrashNode {
         return id;
     }
 
-    public ArrayList<Integer> getCoordiante() {
+    public ArrayList<Integer> getCoordinate() {
         return coordinate;
     }
 

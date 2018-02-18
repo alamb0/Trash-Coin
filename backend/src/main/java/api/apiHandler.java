@@ -5,53 +5,62 @@ import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.bson.Document;
 
 import implement.TrashNode;
 import implement.User;
 import implement.DBHandler;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-@RestController
+import static implement.utility.*;
+
+import java.util.List;@RestController
 public class apiHandler {
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
-
-    @RequestMapping("/trashNode/{id}")
-    public TrashNode TrashNode(@PathParam(value="id") String id) {
-        return new TrashNode(1, new ArrayList<Integer>(Arrays.asList(1, 2)), 15);
-    }
-
-
-    @RequestMapping("/user/{id}")
-    public User User(@PathParam(value="id") String id) {
-        return new User(2, new ArrayList<Integer>(Arrays.asList(1, 2)), 3);
-    }
-
-    @RequestMapping(value="/user/post/{id}", method = RequestMethod.POST)
-    public User postUser(@PathParam(value="id") String id) {
-        User user = new User(2, new ArrayList<Integer>(Arrays.asList(1, 2)), 3);
+    @RequestMapping(value="/near/user", method = RequestMethod.POST)
+    public String addPointToUser(@RequestParam(value="x") String x, @RequestParam(value="y") String y) {
         DBHandler db = new DBHandler();
-
-        ObjectMapper mapper = null;
-        Document doc = null;
-        String converted = "";
         try{
-            mapper = new ObjectMapper();
-            converted = mapper.writeValueAsString(user);
-            doc = Document.parse(converted);
+            db.addPointToUser(Double.parseDouble(x),Double.parseDouble(y));
+            return "SUCCESS";
         }catch(Exception e){
-            return null;
+            return "FAILURE";
+        }
+    }
+
+    @RequestMapping(value="/user/{id}/update", method = RequestMethod.POST)
+    public String updateUserCoordinate(@PathVariable(value="id") String id,
+                            @RequestParam(value="x") String x, @RequestParam(value="y") String y) {
+        DBHandler db = new DBHandler();
+        try{
+            db.findUserandUpdate(Integer.parseInt(id),Double.parseDouble(x),Double.parseDouble(y));
+            return "SUCCESS";
+        }catch(Exception e){
+            return "FAILURE";
         }
 
-        db.getDBcollection(db.USER_COLLECTION).insertOne(doc);
-        return user;
     }
+
+    @RequestMapping(value="/user/create", method = RequestMethod.POST)
+    public User createUser(@RequestParam(value="username") String username, @RequestParam(value="password") String password) {
+        User newUser = new User(username, password, 0, 0);
+        DBHandler db = new DBHandler();
+        db.addUser(newUser);
+        return newUser;
+    }
+
+    @RequestMapping(value="/user/{id}", method = RequestMethod.DELETE)
+    public boolean deleteUser(@PathVariable(value="id") String id) {
+        try{
+            DBHandler db = new DBHandler();
+            db.deleteUser(Long.valueOf(id).longValue());
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+
 }

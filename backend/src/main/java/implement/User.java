@@ -1,8 +1,6 @@
 package implement;
 
 import java.util.ArrayList;
-import static implement.utility.*;
-
 
 public class User {
 

@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 
 import implement.TrashNode;
 import implement.User;
 import implement.DBHandler;
 
 import java.util.List;@RestController
-public class apiHandler {
+public class APIHandler {
 
     @RequestMapping(value="/near/user", method = RequestMethod.POST)
     public String addPointToUser(@RequestParam(value="x") String x, @RequestParam(value="y") String y) {
@@ -30,14 +31,13 @@ public class apiHandler {
     }
 
     @RequestMapping(value="/user/{id}/update", method = RequestMethod.POST)
-    public String updateUserCoordinate(@PathVariable(value="id") String id,
+    public DBObject updateUserCoordinate(@PathVariable(value="id") String id,
                             @RequestParam(value="x") String x, @RequestParam(value="y") String y) {
         DBHandler db = new DBHandler();
         try{
-            db.findUserandUpdate(Integer.parseInt(id),Double.parseDouble(x),Double.parseDouble(y));
-            return "SUCCESS";
+            return db.findUserandUpdate(Long.parseLong(id),Double.parseDouble(x),Double.parseDouble(y));
         }catch(Exception e){
-            return "FAILURE";
+            return new BasicDBObject("message", e.toString());
         }
     }
 

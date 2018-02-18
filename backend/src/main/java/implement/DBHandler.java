@@ -44,7 +44,7 @@ public class DBHandler {
         }
     }
 
-    public void findUserandUpdate(int id, double x, double y) throws Exception{
+    public DBObject findUserandUpdate(long id, double x, double y) throws Exception{
         DBCollection dbCollection = getDBcollection(USER_COLLECTION);
         BasicDBObject query = new BasicDBObject("id", id);
         DBObject dbObject = findUser(query, dbCollection);
@@ -52,6 +52,7 @@ public class DBHandler {
         dbObject.put("y", y);
 
         dbCollection.findAndModify(query, dbObject);
+        return dbObject;
     }
 
     private DBObject findUser(BasicDBObject query, DBCollection collection){

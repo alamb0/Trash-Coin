@@ -15,12 +15,10 @@ import com.mongodb.ServerAddress;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.mongodb.util.JSON;
 
 import implement.User;
-import implement.utility.*;
 
 public class DBHandler {
     public static final String USER_COLLECTION = "userCollection";
@@ -32,6 +30,9 @@ public class DBHandler {
         instance = this;
     }
 
+    public long generateID(){
+        return (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+    }
     public static DBHandler getInstance(){
         try{
              if(instance == null){
@@ -47,11 +48,9 @@ public class DBHandler {
         DBCollection dbCollection = getDBcollection(USER_COLLECTION);
         BasicDBObject query = new BasicDBObject("id", id);
         DBObject dbObject = findUser(query, dbCollection);
-        MongoTemplate mongoTemplate = new MongoTemplate(new MongoClient( "localhost" ),"trashclub");
-        User user = mongoTemplate.getConverter().read(User.class, dbObject);;
-        user.setX(x);
-        user.setY(y);
-        dbObject = objectToDBObject(user);
+        dbObject.put("x", x);
+        dbObject.put("y", y);
+
         dbCollection.findAndModify(query, dbObject);
     }
 
@@ -68,23 +67,19 @@ public class DBHandler {
 
      public void addPointToUser(double x, double y) throws Exception{
         Cursor cursor = getDBcollection(USER_COLLECTION).find();
-        BasicDBObject query = new BasicDBObject();
+        BasicDBObject query;
         DBObject dbUser;
         User user;
-        MongoTemplate mongoTemplate = new MongoTemplate(new MongoClient( "localhost" ),"trashclub");
         while(cursor.hasNext()){
             dbUser = cursor.next();
-            user = mongoTemplate.getConverter().read(User.class, dbUser);
-            user.setPoints(user.getPoints() + 5);
-            dbUser = objectToDBObject(user);
-            query.put("id", user.getId());
+            dbUser.put("points", Integer.parseInt(dbUser.get("points").toString()) + 5);
+            query = new BasicDBObject("id", dbUser.get("id"));
             getDBcollection(USER_COLLECTION).findAndModify(query, dbUser);
         }
     }
 
-    public void addUser(User user){
-        DBObject converted = objectToDBObject(user);
-        getDBcollection(USER_COLLECTION).insert(converted);
+    public void addUser(BasicDBObject user){
+        getDBcollection(USER_COLLECTION).insert(user);
     }
 
     public void deleteUser(long id){

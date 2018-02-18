@@ -1,30 +1,37 @@
 <!DOCTYPE HTML>
-
-<html ng-app="myApp">
+<html >
 	<head>
 		<title>An Duong</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/timeline.css" />
+		<script src="https://jspm.io/system@0.16.js"></script>		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>		
+		<script type="text/javascript" src="assets/js/controller.js"></script>		
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
-	<body ng-controller="myCtrl">
-			<div id="wrapper">
+	<body ng-app="myApp" ng-controller="myCtrl">
+			<div id="wrapper" ng-init="getData()">
 					<header id="header">
 						<div class="logo">
 							<span class="icon fa-code"></span>
 						</div>
 						<div class="content">
 							<div class="inner">
-								<h1>An Duong</h1>
+								<h1>{{username}}</h1>
 								<p></p>
 							</div>
 						</div>
 						<nav>
 							<ul>
-								<li><a href="#work">Work</a></li>									
+								<li><a href="#work">Work</a></li>
 								<li><a href="#education">Education</a></li>
 								<li><a href="#intro">About</a></li>
 								<li><a href="#about">Projects</a></li>
@@ -145,14 +152,7 @@
 			</div>
 
 			<div id="bg"></div>
-			<script src="https://jspm.io/system@0.16.js"></script>		
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.9/angular2.min.js"></script>	
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>		
-			<script type="text/javascript" src="assets/js/controller.js"></script>		
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+
 			
 	</body>
 </html>

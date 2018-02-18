@@ -17,7 +17,7 @@ import implement.User;
 import implement.DBHandler;
 
 import java.util.List;@RestController
-public class APIHandler {
+public class apiHandler {
 
     @RequestMapping(value="/near/user", method = RequestMethod.POST)
     public String addPointToUser(@RequestParam(value="x") String x, @RequestParam(value="y") String y) {
